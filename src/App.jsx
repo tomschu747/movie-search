@@ -22,7 +22,7 @@ export default function App() {
   const [searchTerm, setSearchTerm] = useState("Batman");
   const [watchlist, setWatchlist] = useState([]);
 
-  const API_KEY = "ENTER_OMDB_API_KEY_HERE";
+  const API_KEY = import.meta.env.VITE_OMDB_API_KEY;
 
 
   const fetchMovies = async (query) => {
