@@ -11,6 +11,13 @@ export default function Header({ title, searchTerm }) {
         - Show the current search term somewhere in the header
         - Replace return null with your JSX
     */
+    const description = "Search for your favorite movies and add them to your watchlist."; 
 
-    return null;
+    return (
+        <header className="header">
+            <h1>{title}</h1>
+            <p>{description}</p>
+            <p>Current search term: {searchTerm}</p>
+        </header>
+    );
 }
