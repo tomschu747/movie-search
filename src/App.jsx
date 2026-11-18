@@ -2,7 +2,7 @@
     Lab 8 - App.jsx starter
 ====================================================== */
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./components/Header.jsx";
 import SearchBar from "./components/SearchBar.jsx";
 import MovieGrid from "./components/MovieGrid.jsx";
@@ -79,7 +79,10 @@ export default function App() {
     // TODO 8: 
     // Call fetchMovies with searchTerm 
     // This should run on first load and when searchTerm changes. 
-    fetchMovies(searchTerm);
+    const fetchData = async () => {
+      await fetchMovies(searchTerm);
+    };
+    fetchData();
   }, [searchTerm]);
 
   const handleSearch = (newSearchTerm) => {
