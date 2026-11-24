@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# From lab 9 gitignore
+.env*
+**/.vscode/*
