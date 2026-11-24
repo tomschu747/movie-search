@@ -1,34 +1,19 @@
 /* ======================================================
-    Lab 8 - MovieCard.jsx starter
+    Lab 9 - MovieCard.jsx starter
 ====================================================== */
 
-export default function MovieCard({ movie, addToWatchlist }) {
-    const posterAvailable = movie.Poster && movie.Poster !== "N/A";
+export default function MovieCard({ movie, onAdd }) {
+    const poster =
+        movie.Poster && movie.Poster !== "N/A"
+            ? movie.Poster
+            : "https://via.placeholder.com/200x300?text=No+Image";
 
     return (
         <article className="card">
-            {posterAvailable ? (
-                <img src={movie.Poster} alt={movie.Title} />
-            ) : (
-                <div className="noPoster">No Poster</div>
-            )}
-
-            <div className="cardContent">
-                {/* TODO 17:
-                    Render movie. Title in an h3
-                */}
-                <h3>{movie.Title}</h3>
-                {/* TODO 18:
-                    Render the year, type, and any other info you want to show in a p tag.
-                    - example idea: 2005 – movie – rating – etc..
-                */}
-                <p>{movie.Year} – {movie.Type}</p>
-
-                {/* TODO 19:
-                    Add an "Add to Watchlist" button. When clicked, it should call addToWatchlist(movie). 
-                */}
-                <button className="primary" onClick={() => addToWatchlist(movie)}>Add to Watchlist</button>
-            </div>
+            <img src={poster} alt={movie.Title} />
+            <h3>{movie.Title}</h3>
+            <p>{movie.Year}</p>
+            <button onClick={() => onAdd(movie)}>Add to Watchlist</button>
         </article>
     );
 } 

@@ -1,24 +1,19 @@
 /* ======================================================
-    Lab 8 - MovieGrid.jsx starter
+    Lab 9 - MovieGrid.jsx starter
 ====================================================== */
 
-import MovieCard from "./MovieCard.jsx";
+import MovieCard from "./MovieCard";
 
-export default function MovieGrid({ movies, addToWatchlist }) {
+export default function MovieGrid({ movies, onAdd }) {
+    if (!movies.length) {
+        return <p>No movie results to display.</p>;
+    }
+
     return (
-        <div className="grid">
-            {/* TODO 16: 
-                Render MovieCard for each movie:
-                - you can use map use key={movie.imdbID} and pass movie as a prop
-                - you can also pass addToWatchlist={addToWatchlist} 
-            */}
+        <section className="movieGrid">
             {movies.map((movie) => (
-                <MovieCard
-                    key={movie.imdbID}
-                    movie={movie}
-                    addToWatchlist={addToWatchlist}
-                />
+                <MovieCard key={movie.imdbID} movie={movie} onAdd={onAdd} />
             ))}
-        </div>
+        </section>
     );
-} 
+}
