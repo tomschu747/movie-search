@@ -20,7 +20,15 @@ export default function AuthPage({ setLoggedInUser }) {
         // Send POST /api/register with JSON data. 
         // Include headers: { "Content-Type": "application/json" }. 
         // Include credentials: "include". 
-        // Show the returned message in setMessage(...). 
+        // Show the returned message in setMessage(...).
+        const response = await fetch("/api/register", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include",
+            body: JSON.stringify({ username: registerUsername, password: registerPassword })
+        });
+        const data = await response.json();
+        setMessage(data.message);
     }
 
     async function handleLogin(e) {
@@ -33,6 +41,19 @@ export default function AuthPage({ setLoggedInUser }) {
         // 1. setLoggedInUser(data.username) 
         // 2. navigate("/app") 
         // Otherwise show the returned message. 
+        const response = await fetch("/api/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include",
+            body: JSON.stringify({ username: loginUsername, password: loginPassword })
+        });
+        const data = await response.json();
+        if (response.ok) {
+            setLoggedInUser(data.username);
+            navigate("/app");
+        } else {
+            setMessage(data.message);
+        }
     }
 
     return (
