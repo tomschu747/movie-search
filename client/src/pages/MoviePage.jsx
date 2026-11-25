@@ -55,7 +55,17 @@ export default function MoviePage({ loggedInUser, setLoggedInUser }) {
     async function fetchWatchlist() {
         // TODO 21: 
         // Send GET /api/watchlist with credentials: "include". 
-        // If response.ok is true, save the returned array in watchlist state. 
+        // If response.ok is true, save the returned array in watchlist state.
+        const response = await fetch("http://localhost:3001/api/watchlist", {
+            method: "GET",
+            credentials: "include"
+        });
+        if (response.ok) {
+            const data = await response.json();
+            setWatchlist(data);
+        } else {
+            setWatchlist([]);
+        }
     }
 
     async function handleLogout() {
@@ -65,6 +75,15 @@ export default function MoviePage({ loggedInUser, setLoggedInUser }) {
         // 1. setLoggedInUser(null) 
         // 2. setWatchlist([]) 
         // 3. navigate("/") 
+        const response = await fetch("http://localhost:3001/api/logout", {
+            method: "POST",
+            credentials: "include"
+        });
+        if (response.ok) {
+            setLoggedInUser(null);
+            setWatchlist([]);
+            navigate("/");
+        }
     }
 
     async function addToWatchlist(movie) {
@@ -72,12 +91,28 @@ export default function MoviePage({ loggedInUser, setLoggedInUser }) {
         // Send POST /api/watchlist with JSON movie data. 
         // Include headers and credentials: "include". 
         // After a successful response, call fetchWatchlist() again. 
+        const response = await fetch("http://localhost:3001/api/watchlist", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include",
+            body: JSON.stringify(movie)
+        });
+        if (response.ok) {
+            fetchWatchlist();
+        }
     }
 
     async function removeFromWatchlist(imdbID) {
         // TODO 24: 
         // Send DELETE /api/watchlist/:imdbID with credentials: "include". 
         // After a successful response, call fetchWatchlist() again. 
+        const response = await fetch(`http://localhost:3001/api/watchlist/${imdbID}`, {
+            method: "DELETE",
+            credentials: "include"
+        });
+        if (response.ok) {
+            fetchWatchlist();
+        }
     }
 
     return (

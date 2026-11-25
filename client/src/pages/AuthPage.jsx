@@ -21,7 +21,7 @@ export default function AuthPage({ setLoggedInUser }) {
         // Include headers: { "Content-Type": "application/json" }. 
         // Include credentials: "include". 
         // Show the returned message in setMessage(...).
-        const response = await fetch("/api/register", {
+        const response = await fetch("http://localhost:3001/api/register", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             credentials: "include",
@@ -41,7 +41,7 @@ export default function AuthPage({ setLoggedInUser }) {
         // 1. setLoggedInUser(data.username) 
         // 2. navigate("/app") 
         // Otherwise show the returned message. 
-        const response = await fetch("/api/login", {
+        const response = await fetch("http://localhost:3001/api/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             credentials: "include",
